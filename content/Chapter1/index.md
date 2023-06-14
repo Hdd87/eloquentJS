@@ -17,6 +17,18 @@ since the rest of the indexes are a 0 we dont need to calculate them !
 
 ## Numbers 
 
+There is only one type of number : number
+
+
+```js 
+
+console.log(typeof 1.23) // number
+console.log(typeof 2) //number 
+
+```
+The way the number is written decides whether it is an integer or float 
+but there are no types of these 
+
 1. integers : 150611 ( always precise)
 2. floats : 1.5623      
 3. exponents : 2.99e8 $(2.99*10^8)$
