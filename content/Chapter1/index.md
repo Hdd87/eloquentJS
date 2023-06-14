@@ -1,5 +1,5 @@
 ---
-title: Values Tpes and Operators
+title: Values Types and Operators
 ---
 
 ## bits 
