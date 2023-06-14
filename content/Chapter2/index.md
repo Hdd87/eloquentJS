@@ -127,7 +127,88 @@ console.log(Math.min(2, 4) + 100);
 
 ```
 
-### control flow 
+### Flow Control 
 
+1. straight flow  
+    - go from point 1 to point 2 in a straight line
+
+```js
+let theNumber = 5 ;
+console.log("Your Number is the square root of " + theNumber * theNumber)
+
+```
+
+2. conditional execution 
+    - travel from point 1 to point 2 can have 2 or more paths 
+    - each path depends on a condition
+    - if condition is true we go on that path 
+    - if statement works only if condition is true
+
+```js 
+let num = 25;
+
+if (num < 10) {
+console.log("Small");
+} else if (num < 100) {
+console.log("Medium");
+} else {
+console.log("Large");
+}
+
+
+
+```
+
+3. looping 
+
+- a while loop: runs until condition becomes false 
+
+```js 
+let number = 0 
+
+while(number <= 12){
+    console.log(number);
+    number += 2;
+}
+
+// output 2^10 
+let result = 1;
+let counter = 0 ;
+while (counter<10){
+    result = result * 2 ; 
+    counter += 1 ; // we always iterate counter to ensure no infinite loop 
+}
+console.log(result); // outputs only 2^10
+
+```
+
+- for loop : runs when condition is true
+
+```js
+
+let result = 1;
+
+// the for condition is for the counter not the result
+// it is initialized, gives an endpoint to createa false condition, gives an iteration
+for (let counter = 0; counter < 10; counter = counter + 1) {
+    result = result * 2;
+}
+console.log(result);
+
+```
+
+#### breaking out of loop 
+
+```js
+for (let current = 20; ; current = current + 1) {
+    if (current % 7 == 0) {
+    console.log(current);
+    break;
+    }
+}
+
+```
+Here there is no part that checks for the end of the for loop 
+but we add an if statement with a  break statement which stops the loop
 
 
