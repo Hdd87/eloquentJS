@@ -309,7 +309,41 @@ console.log(twice(5)); // 10
 4. this takes so pracrice to get used too ! 
 
 ## Recursion
-<!-- skipped  -->
+
+it is okay for a function to call itself as long as it doesnot overflow the call stack 
+
+a function that calls itself is *recursive*
+
+recursion allows functions to be written in a different style 
+
+```js 
+const power = function (base, exponent){
+    let result = 1;
+    for(let count=0;count<exponent; count++){
+        result *= base;
+    }
+    return result;
+}
+
+
+// recursion 
+
+function power(base, exponent){
+    if (exponent == 0){
+        return 1;
+    } else {
+        return base * power(base, exponent - 1);
+    }
+}
+
+console.log(power(2,10));
+```
+in this case looping might be better than recursion due to readability 
+
+```js 
+
+
+
 
 ## Growing Functions
 
