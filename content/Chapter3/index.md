@@ -128,6 +128,7 @@ The code inside the `ingredient` function can see the `factor` binding from the 
 ```
 
 ## Functions as Values 
+<!-- TODO: add section later  -->
 
 
 ## Function declaration
