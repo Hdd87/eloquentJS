@@ -227,6 +227,244 @@ console.log(journal[1]['squirrel']) // access index 1 squirrel status
 
 ```
 
+### Mutability 
+
+1. recall that object values can be modified 
+
+2. if there are two numbers 120 and 120 they are precisely the same number, whether or not they refer to the same physical bits 
+
+3. with objects there is difference between :
+    - having references to the same object
+    - having two objects that contain the same properties 
+
+4. consider the following code :
+    
+```js 
+
+let object1 = {value: 10};
+
+let object2 = object1;
+
+let object3 = {value: 10};
+
+console.log(object1 == object2); // true
+
+console.log(object1 == object3); //false
+
+object1.value = 15; 
+
+console.log(object1 == object2); // true
+
+console.log(object2.value); //15
+
+```
+
+5. the object1 binding and the object2 binding grasp the same object 
+    - which is why changing object1 also changes the value of object2
+    - these two are said to have the same identity 
+
+6. object3 points to a different object 
+    - has the same properties as object1 but lives a separate life 
+
+7. with the `let` binding you can keep track of the changes to the bindings with objects whilst the `const` binding points at the same object  but the contents of the object can change
+
+``` js 
+
+const score = { visitors: 0, home: 0};
+
+score.visitors = 1 ;  // allowed
+
+score = { visitors: 1 , home: 1} // not allowed 
+```
+```js 
+let journal = [];
+
+function addEntry(events, squirrel){
+    journal.push({events, squirrel});
+}
+
+addEntry(["work", "touched tree", "pizza", "running",
+"television"], false);
+addEntry(["work", "ice cream", "cauliflower", "lasagna",
+"touched tree", "brushed teeth"], false);
+addEntry(["weekend", "cycling", "break", "peanuts",
+"beer"], true);
 
 
+console.log(journal);
 
+```
+
+## Correlation between boolean variables
+
+1. use the phi coefficient which equals:
+
+2. $(n_{11}n_{00} - n_{10}n_01 )/ sqrt(n_{1.}n_{0.}n_{.1}n_{.0})  $
+
+3. if there are 2 variables x,y ( x is first variable, y is second variable)
+    - n01 : x is false y is true
+    - n1. : sum of measurements where 1st variable is true
+    - n.0 : sum of measurements where 2nd variable is false 
+
+
+Example :
+
+1. no squirrel , no pizza : 76
+2. no squirrel, pizza : 9
+3. squirrel, no pizza : 4
+4. squirrel, pizza : 1
+
+```js 
+
+// direct traslation of the phi formula
+
+let n00 = 76, n01 =9, n10 = 4, n11 = 1;
+
+let table = [n00,n01,n10,n11] ;
+
+function phi(table) {
+    return (table[3] * table[0] - table[2] * table[1]) /
+    Math.sqrt((table[2] + table[3]) * // sum 1st true
+    (table[0] + table[1]) * // sum 1st false
+    (table[1] + table[3]) * // // sum 2nd true
+    (table[0] + table[2])); // // sum 2nd false
+
+
+}
+
+console.log(phi(table)) // 0.069
+
+```
+
+<!-- TODO: figure out how to obtain data in another folder into a .js file for computation -->
+
+
+### Other useful array methods
+
+1. for adding or removing elements at the end of an array we use pop and push respectively
+
+2. for adding and removing at the start of an array we use unshift and shift respectively
+
+```js
+let todoList = [];
+
+function remember(task) {
+todoList.push(task);
+}
+
+function getTask() {
+return todoList.shift();
+}
+
+function rememberUrgently(task) {
+todoList.unshift(task);
+}
+
+// 'phone bill', 'internet bill', 'electricity bill'
+
+remember('groceries');
+remember('phone bill');
+remember('internet bill');
+remember('electricity bill');
+
+console.log(todoList)
+
+console.log(getTask());
+
+console.log(todoList);
+
+rememberUrgently('water bill')
+
+console.log(todoList);
+
+```
+
+3. use indexOf() returns the index of the requested value 
+    - use lastIndexOf() to search from the end of the array instead of index 0
+    - Both indexOf and lastIndexOf take an optional second argument that indicates where to start searching.
+
+```js
+// returns index of value 2
+console.log([1, 2, 3, 2, 1].indexOf(2)); // → 1
+
+// search from index -1
+console.log([1, 2, 3, 2, 1].lastIndexOf(2));// → 3
+
+```
+
+4. Another fundamental array method is slice, which takes start and end indices and returns an array that has only the elements between them. The start
+index is inclusive, the end index exclusive.
+ 
+
+```js
+console.log([0, 1, 2, 3, 4].slice(2, 4));
+// → [2, 3]
+console.log([0, 1, 2, 3, 4].slice(2));
+// → [2, 3, 4]
+```
+
+5. concat and slice in action below 
+    - here we slice upto a provided index 
+    - then concat the sliced array to all elements after the index
+
+```js 
+
+function remove(array, index) {
+    return array.slice(0, index).concat(array.slice(index + 1));
+}
+
+console.log(remove(["a", "b", "c", "d", "e"], 2));
+// → ["a", "b", "d", "e"]
+
+```
+
+
+## JSON : JS Object Notation
+
+1.  objects and arrays are stored in the computer’s memory as sequences of bits holding the
+addresses—the place in memory—of their contents.
+
+2.  So an array with another
+array inside of it consists of (at least) one memory region for the inner array,
+and another for the outer array, containing (among other things) a binary
+number that represents the position of the inner array
+
+3. to send this information we have to *serialize* the data 
+
+    - That means it is converted into a flat description
+
+    - A popular serialization format is called JSON (pronounced “Jason”), which stands for JavaScript Object Notation. 
+    
+    - It is widely used as a data storage and communication format on the Web, even in languages other than JavaScript
+
+4. similar to JavaScript’s way of writing arrays and objects, with a
+few restrictions. All property names have to be surrounded by double quotes,
+and only simple data expressions are allowed—no function calls, bindings, or
+anything that involves actual computation. Comments are not allowed in
+JSON
+
+```js 
+let myData = {
+    "squirrel": false,
+    "events": ["work", "touched tree", "pizza", "running"]
+}
+    
+console.log(typeof myData); // object
+
+```
+
+5. JavaScript gives us the functions JSON.stringify and JSON.parse to convert
+data to and from this format
+
+```js 
+let string = JSON.stringify({
+    squirrel: false,
+    events: ["weekend"]});
+
+
+    console.log(string);     // → {"squirrel":false,"events":["weekend"]}
+
+
+    console.log(JSON.parse(string).events);     // → ["weekend"]
+
+```
