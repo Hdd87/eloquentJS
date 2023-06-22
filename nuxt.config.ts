@@ -5,5 +5,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules:[
     '@nuxt/content',
-  ]
+  ],
+    nitro: {
+      prerender: {
+        routes: ['/sitemap.xml']
+      }
+    }
+  
 })
