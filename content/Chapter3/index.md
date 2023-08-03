@@ -1,6 +1,5 @@
----
-Title: Functions
----
+# Functions
+
 
 ## Defining a function 
 

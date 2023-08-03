@@ -1,4 +1,4 @@
-## Excercises for chapter 4 
+# Excercises for chapter 4 
 
 ## 1. Sum of a range 
 

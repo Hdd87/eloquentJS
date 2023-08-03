@@ -1,3 +1,4 @@
+# Exercises for Chapter 3
 
 1. write a function that takes in 2 arguments and returns their minimum 
     - recall Math.min
